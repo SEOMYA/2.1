@@ -14,34 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.conf import settings
-# from django.conf.urls.static import static
-# from django.contrib import admin
-# from django.urls import path
-
-# from autosalon.views import cars_list_view, car_details_view, sales_by_car
-
-
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('cars/', cars_list_view, name='list'),
-#     path('cars/<int:car_id>/', car_details_view, name='details'),
-#     path('cars/<int:car_id>/sales/', sales_by_car, name='sales')
-# ]
-
-
-# if settings.DEBUG:
-#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from autosalon.views import cars_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('autosalon/', include('autosalon.urls')),  # Подключаем URL-адреса приложения autosalon
+    path('autosalon/', include('autosalon.urls')), 
+    path('', cars_list, name='list'),
+    # Подключаем URL-адреса приложения autosalon
 ]
 
 if settings.DEBUG:

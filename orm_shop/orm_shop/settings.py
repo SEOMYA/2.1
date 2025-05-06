@@ -57,15 +57,15 @@ ROOT_URLCONF = 'orm_shop.urls'
 import os
 from pathlib import Path
 
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            str(BASE_DIR.parent / "templates"),  #  Указываем путь к папке templates
-        ],
-        'APP_DIRS': False,  #  ВАЖНО! Больше не ищем в подпапках приложений
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -85,18 +85,10 @@ WSGI_APPLICATION = 'orm_shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'orm_shop', 
-        'USER': 'myprojectuser',  
-        'PASSWORD': '1',  
-        'HOST': 'localhost', 
-        'PORT': '5432',  # Стандартный порт PostgreSQL
-        'OPTIONS': {
-            'client_encoding': 'UTF8',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',  # Путь к файлу БД (относительно корня проекта)
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -140,8 +132,8 @@ STATICFILES_DIRS = (
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'car_images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'car_images/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
